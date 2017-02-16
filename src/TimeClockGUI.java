@@ -6,13 +6,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.Calendar;
 
 /**
  * Created by Jacob Stewart on 2/7/2017.
  */
 public class TimeClockGUI {
 
-
+    private static double start;
+    private static double end;
+    public static double timeToHours;
     private JTextField textField1;
     private JTextField textField2;
     private JButton startTime;
@@ -69,9 +72,10 @@ public class TimeClockGUI {
         startTime.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                start = Calendar.getInstance().getTimeInMillis();
                 String st = call.getTime();
                 textField1.setText(st);
-                call.cumulativeTimeStart();
+                System.out.println(start);
             }
         });
         endTime.addActionListener(new ActionListener() {
@@ -79,10 +83,15 @@ public class TimeClockGUI {
             public void actionPerformed(ActionEvent e) {
                 String st = textField1.getText();  // start time variable
                 String et = call.getTime();  // end time variable
+                end = Calendar.getInstance().getTimeInMillis();
+                timeToHours = (end - start) / 3600000;
+                String strStart = Double.toString(timeToHours);
+
                 try {
                     call.recordEndTime(st, et);
-                    call.cumulativeTimeEnd();
-                    console.setText(call.cumulativeTime(call.cumulativeTimeStart(), call.cumulativeTimeEnd()));
+                    console.setText(strStart);
+                    System.out.println(end);
+                    System.out.println(end - start);
                 } catch (ClassNotFoundException e1) {
                     e1.printStackTrace();
                 }

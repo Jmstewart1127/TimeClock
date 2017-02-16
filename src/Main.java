@@ -13,5 +13,8 @@ public class Main
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
+        Methods mef = new Methods();
+        TimeClockGUI call = new TimeClockGUI();
     }
 }

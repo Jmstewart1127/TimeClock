@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -7,6 +8,9 @@ import java.util.Calendar;
  */
 public class Methods
 {
+
+    public double val;
+
     public static String getTime() {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -14,46 +18,6 @@ public class Methods
         return time;
     }
 
-    public static long cumulativeTimeStart() {
-        long start = System.currentTimeMillis()%1000;
-        return start;
-    }
-
-    public static long cumulativeTimeEnd() {
-        long end = System.currentTimeMillis()%1000;
-        return end;
-    }
-
-    public static String cumulativeTime(long start, long end)
-    {
-        long time = end - start;
-        long timeIntoHours = 0;
-        String text = "Hours: ";
-        if (time >= 3600000)
-        {
-            timeIntoHours = time / 3600000;
-            String output = text + timeIntoHours;
-            return output;
-        }
-        if (time < 3600000 && time > 60000)
-        {
-            text = "Minutes: ";
-            timeIntoHours = time / 60000;
-            String output = text + timeIntoHours;
-            return output;
-        }
-        if (time < 60000)
-        {
-            text = "Seconds: ";
-            timeIntoHours = time / 1000;
-            String output = text + timeIntoHours;
-            return output;
-        }
-        String strLong = Long.toString(timeIntoHours);
-        String output = text + strLong;
-
-        return output;
-    }
 
     public static void recordEndTime(String time, String time2) throws ClassNotFoundException   // Records start time and end time
     {                                                                                            // displays recorded entry data in console
