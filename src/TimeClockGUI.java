@@ -47,13 +47,23 @@ public class TimeClockGUI {
         addNewUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                NewUser panel = new NewUser();
+                JFrame frame = new JFrame("NewUser");
+                frame.setContentPane(panel.panel1);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setVisible(true);
             }
         });
         addNewTask.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                NewTask panel = new NewTask();
+                JFrame frame = new JFrame("NewTask");
+                frame.setContentPane(panel.panel1);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setVisible(true);
             }
         });
         console.addComponentListener(new ComponentAdapter() {
