@@ -1,6 +1,7 @@
 /**
  * Created by Jacob Stewart on 2/7/2017.
  */
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,12 +16,14 @@ public class TimeClockGUI {
 
     private static double start;
     private static double end;
+    private static double shiftTime;
     public static double timeToHours;
+
     private JTextField textField1;
     private JTextField textField2;
     private JButton startTime;
     private JButton endTime;
-    private JComboBox users;
+    public JComboBox users;
     private JComboBox tasks;
     private JButton aJButton;
     private JButton addNewTask;
@@ -35,6 +38,13 @@ public class TimeClockGUI {
         users.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    call.selectUser();
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                }
+
+                
 
             }
         });
@@ -100,6 +110,7 @@ public class TimeClockGUI {
                 try {
                     call.recordEndTime(st, et);
                     console.setText(strStart);
+
                     System.out.println(end);
                     System.out.println(end - start);
                 } catch (ClassNotFoundException e1) {

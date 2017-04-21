@@ -11,6 +11,8 @@ public class NewUser
     private JTextField textField1;
     public JPanel panel1;
     private JButton addButton;
+    private JLabel messageField;
+
 
     Methods call = new Methods();
 
@@ -27,8 +29,17 @@ public class NewUser
                 JFrame frame = new JFrame("NewUser");
                 String nu = textField1.getText();
                 try {
-                    call.addNewUser(nu);
-                    frame.dispose();
+                    if(nu.isEmpty())
+                    {
+                        messageField.setText("Enter a name");
+                    }
+                    else
+                    {
+                        call.addNewUser(nu);
+                        frame.setVisible(false);
+                        frame.dispose();
+                        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+                    }
                 } catch (ClassNotFoundException e1) {
                     e1.printStackTrace();
                 }

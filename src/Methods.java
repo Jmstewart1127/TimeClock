@@ -1,5 +1,5 @@
+import javax.swing.*;
 import java.sql.*;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -9,7 +9,6 @@ import java.util.Calendar;
 public class Methods
 {
 
-
     public static String getTime()
     {
         Calendar cal = Calendar.getInstance();
@@ -17,7 +16,6 @@ public class Methods
         String time = sdf.format(cal.getTime());
         return time;
     }
-
 
     public static void recordEndTime(String time, String time2) throws ClassNotFoundException   // Records start time and end time
     {                                                                                            // displays recorded entry data in console
@@ -97,6 +95,37 @@ public class Methods
             }
         }
     }
+
+    public static void selectUser() throws ClassNotFoundException   // Records start time and end time
+    {                                                                                            // displays recorded entry data in console
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e1) {
+            e1.printStackTrace();
+        }
+
+        Connection connection = null;
+        try {
+            Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+
+            connection = DriverManager.getConnection("jdbc:sqlite:time.db");
+            Statement st = connection.createStatement();
+
+            ResultSet r=st.executeQuery("select username from time");
+
+            while (r.next()) {
+                TimeClockGUI gui = new TimeClockGUI();
+                gui.users.addItem(r.getString("username"));
+            }
+
+            connection.close();
+        } catch (Exception e1) {
+            JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE);
+            System.exit(0);
+        }
+    }
+
+
 
     public static String consoleOut() throws ClassNotFoundException   // Records start time and end time
     {                                                                                            // displays recorded entry data in console
